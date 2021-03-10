@@ -62,7 +62,7 @@ Number of completed iterations: 8
 ****** Winner Assessment ******
 App versions in this experiment: [sample-application-v1 sample-application-v2]
 Winning version: sample-application-v2
-Recommended baseline: sample-application-v2
+Version recommended for promotion: sample-application-v2
 
 ****** Objective Assessment ******
 +--------------------------+-----------------------+-----------------------+

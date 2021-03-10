@@ -165,7 +165,7 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 			}
 
 			if d.experiment.Status.VersionRecommendedForPromotion != nil {
-				d.description.WriteString(fmt.Sprintf("Recommended baseline: %s\n", *d.experiment.Status.VersionRecommendedForPromotion))
+				d.description.WriteString(fmt.Sprintf("Version recommended for promotion: %s\n", *d.experiment.Status.VersionRecommendedForPromotion))
 			}
 		}
 	}

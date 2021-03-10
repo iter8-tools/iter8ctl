@@ -220,5 +220,5 @@ status:
   initTime: "2020-12-28T18:33:34Z"
   lastUpdateTime: "2020-12-28T18:34:50Z"
   message: 'IterationUpdate: Completed Iteration 5'
-  recommendedBaseline: canary
+  versionRecommendedForPromotion: canary
   startTime: "2020-12-28T18:33:42Z"

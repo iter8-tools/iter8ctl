@@ -217,6 +217,6 @@ status:
   initTime: "2021-02-12T19:57:46Z"
   lastUpdateTime: "2021-02-12T20:01:08Z"
   message: 'ExperimentCompleted: Experiment completed successfully'
-  recommendedBaseline: sample-application-v2
+  versionRecommendedForPromotion: sample-application-v2
   stage: Completed
   startTime: "2021-02-12T19:57:47Z"

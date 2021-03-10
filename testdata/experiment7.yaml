@@ -220,5 +220,5 @@ status:
   initTime: "2020-12-28T18:33:34Z"
   lastUpdateTime: "2020-12-28T18:36:14Z"
   message: 'ExperimentCompleted: Experiment completed successfully'
-  recommendedBaseline: canary
+  versionRecommendedForPromotion: canary
   startTime: "2020-12-28T18:33:42Z"

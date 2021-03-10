@@ -11,7 +11,7 @@ Number of completed iterations: 10
 ****** Winner Assessment ******
 App versions in this experiment: [default canary]
 Winning version: not found
-Recommended baseline: canary
+Version recommended for promotion: canary
 
 ****** Objective Assessment ******
 +--------------------------+---------+--------+
