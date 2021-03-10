@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/ghodss/yaml"
-	"github.com/iter8-tools/etc3/api/v2alpha1"
+	"github.com/iter8-tools/etc3/api/v2alpha2"
 	"github.com/iter8-tools/iter8ctl/utils"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/resource"
@@ -116,10 +116,10 @@ func TestStringifyObjective(t *testing.T) {
 
 func ExampleGetMetricNameAndUnits() {
 	u := "inches"
-	mi := v2alpha1.MetricInfo{
+	mi := v2alpha2.MetricInfo{
 		Name: "height",
-		MetricObj: v2alpha1.Metric{
-			Spec: v2alpha1.MetricSpec{
+		MetricObj: v2alpha2.Metric{
+			Spec: v2alpha2.MetricSpec{
 				Units: &u,
 			},
 		},
@@ -130,9 +130,9 @@ func ExampleGetMetricNameAndUnits() {
 }
 
 func ExampleGetMetricNameAndUnits_unitless() {
-	mi := v2alpha1.MetricInfo{
+	mi := v2alpha2.MetricInfo{
 		Name:      "weight",
-		MetricObj: v2alpha1.Metric{},
+		MetricObj: v2alpha2.Metric{},
 	}
 	met := GetMetricNameAndUnits(mi)
 	fmt.Println(met)
@@ -141,7 +141,7 @@ func ExampleGetMetricNameAndUnits_unitless() {
 
 func ExampleStringifyObjective_upperlimit() {
 	q := resource.MustParse("0.01")
-	obj := v2alpha1.Objective{
+	obj := v2alpha2.Objective{
 		Metric:     "error-rate",
 		UpperLimit: &q,
 		LowerLimit: nil,
@@ -153,7 +153,7 @@ func ExampleStringifyObjective_upperlimit() {
 
 func ExampleStringifyObjective_lowerlimit() {
 	q := resource.MustParse("0.998")
-	obj := v2alpha1.Objective{
+	obj := v2alpha2.Objective{
 		Metric:     "accuracy",
 		UpperLimit: nil,
 		LowerLimit: &q,
@@ -166,7 +166,7 @@ func ExampleStringifyObjective_lowerlimit() {
 func ExampleStringifyObjective_upperandlower() {
 	q1 := resource.MustParse("6.998")
 	q2 := resource.MustParse("7.012")
-	obj := v2alpha1.Objective{
+	obj := v2alpha2.Objective{
 		Metric:     "pH level",
 		UpperLimit: &q2,
 		LowerLimit: &q1,

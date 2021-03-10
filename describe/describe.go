@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/ghodss/yaml"
-	"github.com/iter8-tools/etc3/api/v2alpha1"
+	"github.com/iter8-tools/etc3/api/v2alpha2"
 	"github.com/iter8-tools/iter8ctl/experiment"
 	"github.com/olekukonko/tablewriter"
 )
@@ -151,7 +151,7 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 	if a := d.experiment.Status.Analysis; a != nil {
 		if w := a.WinnerAssessment; w != nil {
 			d.description.WriteString("\n****** Winner Assessment ******\n")
-			if d.experiment.Spec.Strategy.TestingPattern != v2alpha1.TestingPatternConformance && d.experiment.Spec.VersionInfo != nil {
+			if d.experiment.Spec.Strategy.TestingPattern != v2alpha2.TestingPatternConformance && d.experiment.Spec.VersionInfo != nil {
 				versions := []string{d.experiment.Spec.VersionInfo.Baseline.Name}
 				for i := 0; i < len(d.experiment.Spec.VersionInfo.Candidates); i++ {
 					versions = append(versions, d.experiment.Spec.VersionInfo.Candidates[i].Name)
@@ -164,8 +164,8 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 				d.description.WriteString("Winning version: not found\n")
 			}
 
-			if d.experiment.Status.RecommendedBaseline != nil {
-				d.description.WriteString(fmt.Sprintf("Recommended baseline: %s\n", *d.experiment.Status.RecommendedBaseline))
+			if d.experiment.Status.VersionRecommendedForPromotion != nil {
+				d.description.WriteString(fmt.Sprintf("Recommended baseline: %s\n", *d.experiment.Status.VersionRecommendedForPromotion))
 			}
 		}
 	}

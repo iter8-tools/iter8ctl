@@ -4,13 +4,13 @@ package experiment
 import (
 	"fmt"
 
-	v2alpha1 "github.com/iter8-tools/etc3/api/v2alpha1"
+	v2alpha2 "github.com/iter8-tools/etc3/api/v2alpha2"
 	"gopkg.in/inf.v0"
 )
 
-// Experiment is an enhancement of v2alpha1.Experiment struct, and supports various methods used in describing an experiment.
+// Experiment is an enhancement of v2alpha2.Experiment struct, and supports various methods used in describing an experiment.
 type Experiment struct {
-	v2alpha1.Experiment
+	v2alpha2.Experiment
 }
 
 // Started indicates if at least one iteration of the experiment has completed.
@@ -59,7 +59,7 @@ func (e *Experiment) GetMetricStrs(metric string) []string {
 }
 
 // GetMetricNameAndUnits extracts the name, and if specified, units for the given metricInfo object and combines them into a string.
-func GetMetricNameAndUnits(metricInfo v2alpha1.MetricInfo) string {
+func GetMetricNameAndUnits(metricInfo v2alpha2.MetricInfo) string {
 	r := metricInfo.Name
 	if metricInfo.MetricObj.Spec.Units != nil {
 		r += fmt.Sprintf(" (" + *metricInfo.MetricObj.Spec.Units + ")")
@@ -68,7 +68,7 @@ func GetMetricNameAndUnits(metricInfo v2alpha1.MetricInfo) string {
 }
 
 // StringifyObjective returns a string representation of the given objective.
-func StringifyObjective(objective v2alpha1.Objective) string {
+func StringifyObjective(objective v2alpha2.Objective) string {
 	r := ""
 	if objective.LowerLimit != nil {
 		z := new(inf.Dec).Round(objective.LowerLimit.AsDec(), 3, inf.RoundCeil)
