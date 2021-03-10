@@ -84,7 +84,7 @@ spec:
       metadata:
         annotations:
           kubectl.kubernetes.io/last-applied-configuration: |
-            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"95th-percentile-tail-latency","namespace":"iter8-system"},"spec":{"description":"95th percentile tail latency","params":{"query":"histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval])) by (le))"},"provider":"prometheus","sample_size":{"name":"request-count"},"type":"gauge","units":"milliseconds"}}
+            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"95th-percentile-tail-latency","namespace":"iter8-system"},"spec":{"description":"95th percentile tail latency","params":{"query":"histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval])) by (le))"},"provider":"prometheus","sampleSize":"request-count","type":"gauge","units":"milliseconds"}}
         creationTimestamp: "2020-12-28T04:10:12Z"
         generation: 1
         managedFields:
@@ -102,7 +102,7 @@ spec:
                 .: {}
                 f:query: {}
               f:provider: {}
-              f:sample_size:
+              f:sampleSize:
                 .: {}
                 f:name: {}
               f:type: {}
@@ -121,10 +121,10 @@ spec:
           value: histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval]))
             by (le))
         provider: prometheus
-        sample_size:
-          name: request-count
+        sampleSize: request-count
         type: gauge
         units: milliseconds
+        urlTemplate: url
     name: 95th-percentile-tail-latency
   - metricObj:
       apiVersion: iter8.tools/v2alpha2
@@ -132,7 +132,7 @@ spec:
       metadata:
         annotations:
           kubectl.kubernetes.io/last-applied-configuration: |
-            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"mean-latency","namespace":"iter8-system"},"spec":{"description":"Mean latency","params":{"query":"(sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval]))or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))"},"provider":"prometheus","sample_size":{"name":"request-count"},"type":"gauge","units":"milliseconds"}}
+            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"mean-latency","namespace":"iter8-system"},"spec":{"description":"Mean latency","params":{"query":"(sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval]))or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))"},"provider":"prometheus","sampleSize":"request-count","type":"gauge","units":"milliseconds"}}
         creationTimestamp: "2020-12-28T04:10:12Z"
         generation: 1
         managedFields:
@@ -150,7 +150,7 @@ spec:
                 .: {}
                 f:query: {}
               f:provider: {}
-              f:sample_size:
+              f:sampleSize:
                 .: {}
                 f:name: {}
               f:type: {}
@@ -168,10 +168,10 @@ spec:
         - name: query
           value: (sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))
         provider: prometheus
-        sample_size:
-          name: request-count
+        sampleSize: request-count
         type: gauge
         units: milliseconds
+        urlTemplate: url
     name: mean-latency
   - metricObj:
       apiVersion: iter8.tools/v2alpha2
@@ -179,7 +179,7 @@ spec:
       metadata:
         annotations:
           kubectl.kubernetes.io/last-applied-configuration: |
-            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"error-rate","namespace":"iter8-system"},"spec":{"description":"Fraction of requests with error responses","params":{"query":"(sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))"},"provider":"prometheus","sample_size":{"name":"request-count"},"type":"gauge"}}
+            {"apiVersion":"iter8.tools/v2alpha2","kind":"Metric","metadata":{"annotations":{},"name":"error-rate","namespace":"iter8-system"},"spec":{"description":"Fraction of requests with error responses","params":{"query":"(sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))"},"provider":"prometheus","sampleSize":"request-count","type":"gauge"}}
         creationTimestamp: "2020-12-28T04:10:12Z"
         generation: 1
         managedFields:
@@ -197,7 +197,7 @@ spec:
                 .: {}
                 f:query: {}
               f:provider: {}
-              f:sample_size:
+              f:sampleSize:
                 .: {}
                 f:name: {}
               f:type: {}
@@ -214,9 +214,9 @@ spec:
         - name: query
           value: (sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))
         provider: prometheus
-        sample_size:
-          name: request-count
+        sampleSize: request-count
         type: gauge
+        urlTemplate: url
     name: error-rate
   - metricObj:
       apiVersion: iter8.tools/v2alpha2
@@ -257,6 +257,7 @@ spec:
           value: sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0)
         provider: prometheus
         type: counter
+        urlTemplate: url
     name: request-count
   strategy:
     handlers:
