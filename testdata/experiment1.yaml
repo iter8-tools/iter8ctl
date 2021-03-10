@@ -1,14 +1,14 @@
-apiVersion: iter8.tools/v2alpha1
+apiVersion: iter8.tools/v2alpha2
 kind: Experiment
 metadata: 
   annotations: 
-    kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha1\",\"kind\":\"Experiment\",\"metadata\":{\"annotations\":{},\"name\":\"sklearn-iris-experiment-1\",\"namespace\":\"kfserving-test\"},\"spec\":{\"criteria\":{\"indicators\":[\"95th-percentile-tail-latency\"],\"objectives\":[{\"metric\":\"mean-latency\",\"upperLimit\":1000},{\"metric\":\"error-rate\",\"upperLimit\":\"0.01\"}]},\"duration\":{\"intervalSeconds\":15,\"iterationsPerLoop\":10},\"strategy\":{\"type\":\"Canary\"},\"target\":\"kfserving-test/sklearn-iris\"}}\n"
+    kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha2\",\"kind\":\"Experiment\",\"metadata\":{\"annotations\":{},\"name\":\"sklearn-iris-experiment-1\",\"namespace\":\"kfserving-test\"},\"spec\":{\"criteria\":{\"indicators\":[\"95th-percentile-tail-latency\"],\"objectives\":[{\"metric\":\"mean-latency\",\"upperLimit\":1000},{\"metric\":\"error-rate\",\"upperLimit\":\"0.01\"}]},\"duration\":{\"intervalSeconds\":15,\"iterationsPerLoop\":10},\"strategy\":{\"type\":\"Canary\"},\"target\":\"kfserving-test/sklearn-iris\"}}\n"
   creationTimestamp: "2020-12-27T21:55:48Z"
   generation: 2
   name: sklearn-iris-experiment-1
   namespace: kfserving-test
   resourceVersion: "2410"
-  selfLink: /apis/iter8.tools/v2alpha1/namespaces/kfserving-test/experiments/sklearn-iris-experiment-1
+  selfLink: /apis/iter8.tools/v2alpha2/namespaces/kfserving-test/experiments/sklearn-iris-experiment-1
   uid: b99489b6-a1b4-420f-9615-165d6ff88293
 spec: 
   criteria: 
@@ -28,17 +28,17 @@ spec:
   metrics: 
     - 
       metricObj: 
-        apiVersion: iter8.tools/v2alpha1
+        apiVersion: iter8.tools/v2alpha2
         kind: Metric
         metadata: 
           annotations: 
-            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha1\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"mean-latency\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Mean latency\",\"params\":{\"query\":\"(sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval]))or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\",\"units\":\"milliseconds\"}}\n"
+            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha2\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"mean-latency\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Mean latency\",\"params\":{\"query\":\"(sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval]))or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\",\"units\":\"milliseconds\"}}\n"
           creationTimestamp: "2020-12-27T21:53:23Z"
           generation: 1
           name: mean-latency
           namespace: iter8-system
           resourceVersion: "1923"
-          selfLink: /apis/iter8.tools/v2alpha1/namespaces/iter8-system/metrics/mean-latency
+          selfLink: /apis/iter8.tools/v2alpha2/namespaces/iter8-system/metrics/mean-latency
           uid: e17018f8-613d-47c7-bb07-c32a03befe2c
         spec: 
           description: "Mean latency"
@@ -53,17 +53,17 @@ spec:
       name: mean-latency
     - 
       metricObj: 
-        apiVersion: iter8.tools/v2alpha1
+        apiVersion: iter8.tools/v2alpha2
         kind: Metric
         metadata: 
           annotations: 
-            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha1\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"error-rate\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Fraction of requests with error responses\",\"params\":{\"query\":\"(sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\"}}\n"
+            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha2\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"error-rate\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Fraction of requests with error responses\",\"params\":{\"query\":\"(sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\"}}\n"
           creationTimestamp: "2020-12-27T21:53:23Z"
           generation: 1
           name: error-rate
           namespace: iter8-system
           resourceVersion: "1922"
-          selfLink: /apis/iter8.tools/v2alpha1/namespaces/iter8-system/metrics/error-rate
+          selfLink: /apis/iter8.tools/v2alpha2/namespaces/iter8-system/metrics/error-rate
           uid: f9dc0774-eddc-4e44-8c27-b459f14dd4f8
         spec: 
           description: "Fraction of requests with error responses"
@@ -77,17 +77,17 @@ spec:
       name: error-rate
     - 
       metricObj: 
-        apiVersion: iter8.tools/v2alpha1
+        apiVersion: iter8.tools/v2alpha2
         kind: Metric
         metadata: 
           annotations: 
-            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha1\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"request-count\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Number of requests\",\"params\":{\"query\":\"sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0)\"},\"provider\":\"prometheus\",\"type\":\"counter\"}}\n"
+            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha2\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"request-count\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"Number of requests\",\"params\":{\"query\":\"sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0)\"},\"provider\":\"prometheus\",\"type\":\"counter\"}}\n"
           creationTimestamp: "2020-12-27T21:53:23Z"
           generation: 1
           name: request-count
           namespace: iter8-system
           resourceVersion: "1924"
-          selfLink: /apis/iter8.tools/v2alpha1/namespaces/iter8-system/metrics/request-count
+          selfLink: /apis/iter8.tools/v2alpha2/namespaces/iter8-system/metrics/request-count
           uid: f67ca0d6-5653-4f52-a0d9-7394a56e595a
         spec: 
           description: "Number of requests"
@@ -99,17 +99,17 @@ spec:
       name: request-count
     - 
       metricObj: 
-        apiVersion: iter8.tools/v2alpha1
+        apiVersion: iter8.tools/v2alpha2
         kind: Metric
         metadata: 
           annotations: 
-            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha1\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"95th-percentile-tail-latency\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"95th percentile tail latency\",\"params\":{\"query\":\"histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval])) by (le))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\",\"units\":\"milliseconds\"}}\n"
+            kubectl.kubernetes.io/last-applied-configuration: "{\"apiVersion\":\"iter8.tools/v2alpha2\",\"kind\":\"Metric\",\"metadata\":{\"annotations\":{},\"name\":\"95th-percentile-tail-latency\",\"namespace\":\"iter8-system\"},\"spec\":{\"description\":\"95th percentile tail latency\",\"params\":{\"query\":\"histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval])) by (le))\"},\"provider\":\"prometheus\",\"sample_size\":{\"name\":\"request-count\"},\"type\":\"gauge\",\"units\":\"milliseconds\"}}\n"
           creationTimestamp: "2020-12-27T21:53:23Z"
           generation: 1
           name: 95th-percentile-tail-latency
           namespace: iter8-system
           resourceVersion: "1920"
-          selfLink: /apis/iter8.tools/v2alpha1/namespaces/iter8-system/metrics/95th-percentile-tail-latency
+          selfLink: /apis/iter8.tools/v2alpha2/namespaces/iter8-system/metrics/95th-percentile-tail-latency
           uid: b8375e54-33d1-4185-9eac-087ebf7693c9
         spec: 
           description: "95th percentile tail latency"
