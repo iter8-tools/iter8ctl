@@ -3,7 +3,7 @@ kind: Experiment
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"iter8.tools/v2alpha2","kind":"Experiment","metadata":{"annotations":{},"name":"experiment-1","namespace":"knative-test"},"spec":{"criteria":{"objectives":[{"metric":"mean-latency","upperLimit":2000},{"metric":"error-rate","upperLimit":"0.01"}]},"duration":{"intervalSeconds":20,"iterationsPerLoop":8},"strategy":{"handlers":{"failure":"none","finish":"none","rollback":"none","start":"none"},"testingPattern":"Canary"},"target":"knative-test/sample-application","versionInfo":{"baseline":{"name":"sample-application-v1","variables":[{"name":"revision","value":"default"}],"weightObjRef":{"apiVersion":"serving.knative.dev/v1","fieldPath":"/spec/traffic/0/percent","kind":"Service","name":"sample-application","namespace":"knative-test"}},"candidates":[{"name":"sample-application-v2","variables":[{"name":"revision","value":"candidate-0"}],"weightObjRef":{"apiVersion":"serving.knative.dev/v1","fieldPath":"/spec/traffic/1/percent","kind":"Service","name":"sample-application","namespace":"knative-test"}}]}}}
+      {"apiVersion":"iter8.tools/v2alpha2","kind":"Experiment","metadata":{"annotations":{},"name":"experiment-1","namespace":"knative-test"},"spec":{"criteria":{"objectives":[{"metric":"mean-latency","upperLimit":2000},{"metric":"error-rate","upperLimit":"0.01"}]},"duration":{"intervalSeconds":20,"iterationsPerLoop":8},"strategy":{"handlers":{"failure":"none","finish":"none","rollback":"none","start":"none"},"testingPattern":"Canary"},"target":"knative-test/sample-application","versionInfo":{"baseline":{"name":"sample-application-v1","variables":[{"name":"revision","value":"default"}],"weightObjRef":{"apiVersion":"serving.knative.dev/v1","fieldPath":".spec.traffic[0].percent","kind":"Service","name":"sample-application","namespace":"knative-test"}},"candidates":[{"name":"sample-application-v2","variables":[{"name":"revision","value":"candidate-0"}],"weightObjRef":{"apiVersion":"serving.knative.dev/v1","fieldPath":".spec.traffic[1].percent","kind":"Service","name":"sample-application","namespace":"knative-test"}}]}}}
   creationTimestamp: "2021-02-12T19:57:46Z"
   finalizers:
   - experiments.iter8.tools.finalizer
@@ -128,7 +128,7 @@ spec:
         value: default
       weightObjRef:
         apiVersion: serving.knative.dev/v1
-        fieldPath: /spec/traffic/0/percent
+        fieldPath: .spec.traffic[0].percent
         kind: Service
         name: sample-application
         namespace: knative-test
@@ -139,7 +139,7 @@ spec:
         value: candidate-0
       weightObjRef:
         apiVersion: serving.knative.dev/v1
-        fieldPath: /spec/traffic/1/percent
+        fieldPath: .spec.traffic[1].percent
         kind: Service
         name: sample-application
         namespace: knative-test
