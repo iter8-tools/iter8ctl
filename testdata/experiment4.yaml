@@ -45,6 +45,7 @@ spec:
         - name: query
           value: histogram_quantile(0.95, sum(rate(revision_app_request_latencies_bucket{service_name=~'.*$name'}[$interval])) by (le))
         provider: prometheus
+        jqExpression: ".data.result[0].value[1] | tonumber"
         sampleSize: request-count
         type: gauge
         units: milliseconds
@@ -70,6 +71,7 @@ spec:
         - name: query
           value: (sum(increase(revision_app_request_latencies_sum{service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))
         provider: prometheus
+        jqExpression: ".data.result[0].value[1] | tonumber"
         sampleSize: request-count
         type: gauge
         units: milliseconds
@@ -95,6 +97,7 @@ spec:
         - name: query
           value: (sum(increase(revision_app_request_latencies_count{response_code_class!='2xx',service_name=~'.*$name'}[$interval])) or on() vector(0)) / (sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0))
         provider: prometheus
+        jqExpression: ".data.result[0].value[1] | tonumber"
         sampleSize: request-count
         type: gauge
         urlTemplate: url
@@ -119,6 +122,7 @@ spec:
         - name: query
           value: sum(increase(revision_app_request_latencies_count{service_name=~'.*$name'}[$interval])) or on() vector(0)
         provider: prometheus
+        jqExpression: ".data.result[0].value[1] | tonumber"
         type: counter
         urlTemplate: url
     name: request-count
