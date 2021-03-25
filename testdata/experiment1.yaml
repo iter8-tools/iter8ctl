@@ -128,14 +128,9 @@ spec:
           urlTemplate: url
       name: 95th-percentile-tail-latency
   strategy: 
-    handlers: 
-      failure: finish
-      finish: finish
-      rollback: finish
-      start: start
-    type: Canary
+    testingPattern: Canary
+    deploymentPattern: Progressive
     weights: 
-      algorithm: Progressive
       maxCandidateWeight: 100
       maxCandidateWeightIncrement: 10
   target: kfserving-test/sklearn-iris
@@ -147,11 +142,11 @@ status:
       message: "Start handler 'start' launched"
       reason: StartHandlerLaunched
       status: "False"
-      type: ExperimentCompleted
+      type: Completed
     - 
       lastTransitionTime: "2020-12-27T21:55:48Z"
       status: "False"
-      type: ExperimentFailed
+      type: Failed
   initTime: "2020-12-27T21:55:48Z"
   lastUpdateTime: "2020-12-27T21:55:48Z"
   message: "StartHandlerLaunched: Start handler 'start' launched"

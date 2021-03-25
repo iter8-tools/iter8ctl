@@ -210,7 +210,7 @@ func (d *Cmd) printVersionAssessment() *Cmd {
 
 // printMetrics prints a matrix of (decimal) metric values into d's description buffer.
 // Rows correspond to experiment metrics, columns correspond to versions, and entry [i, j] indicates the value of metric i for version j.
-// Metrics are printed in the same sequence as in the experiment's spec.metrics section.
+// Metrics are printed in the same sequence as in the experiment's status.metrics section.
 // If metrics are unavailable for the underlying experiment, this method will indicate likewise.
 func (d *Cmd) printMetrics() *Cmd {
 	if d.err != nil {
@@ -223,7 +223,7 @@ func (d *Cmd) printMetrics() *Cmd {
 			table.SetRowLine(true)
 			versions := d.experiment.GetVersions()
 			table.SetHeader(append([]string{"Metric"}, versions...))
-			for _, metricInfo := range d.experiment.Spec.Metrics {
+			for _, metricInfo := range d.experiment.Status.Metrics {
 				row := []string{experiment.GetMetricNameAndUnits(metricInfo)}
 				table.Append(append(row, d.experiment.GetMetricStrs(metricInfo.Name)...))
 			}

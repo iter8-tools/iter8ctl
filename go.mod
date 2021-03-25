@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/iter8-tools/etc3 v0.1.16-pre
+	github.com/iter8-tools/etc3 v0.1.19-pre.3
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/sirupsen/logrus v1.7.0
 	github.com/stretchr/testify v1.7.0

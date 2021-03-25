@@ -98,7 +98,7 @@ func TestGetMetricNameAndUnits(t *testing.T) {
 	metricNameAndUnits := [4]string{"95th-percentile-tail-latency (milliseconds)", "mean-latency (milliseconds)", "error-rate", "request-count"}
 	mnu := [4]string{}
 	for i := 0; i < 4; i++ {
-		mnu[i] = GetMetricNameAndUnits(tests[2].exp.Spec.Metrics[i])
+		mnu[i] = GetMetricNameAndUnits(tests[2].exp.Status.Metrics[i])
 	}
 	assert.Equal(t, metricNameAndUnits, mnu)
 }

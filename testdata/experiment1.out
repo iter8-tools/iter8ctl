@@ -3,7 +3,8 @@
 Experiment name: sklearn-iris-experiment-1
 Experiment namespace: kfserving-test
 Target: kfserving-test/sklearn-iris
-Testing pattern: 
+Testing pattern: Canary
+Deployment pattern: Progressive
 
 ****** Progress Summary ******
 Number of completed iterations: 0

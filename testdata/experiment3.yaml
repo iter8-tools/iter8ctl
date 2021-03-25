@@ -24,6 +24,101 @@ spec:
   duration:
     intervalSeconds: 15
     iterationsPerLoop: 10
+  strategy:
+    testingPattern: Canary
+    weights:
+      maxCandidateWeight: 100
+      maxCandidateWeightIncrement: 10
+  target: kfserving-test/sklearn-iris
+  versionInfo:
+    baseline:
+      name: default
+    candidates:
+    - name: canary
+      weightObjRef:
+        apiVersion: serving.kubeflow.org/v1alpha2
+        fieldPath: .spec.canaryTrafficPercent
+        kind: InferenceService
+        name: sklearn-iris
+        namespace: kfserving-test
+status:
+  analysis:
+    aggregatedMetrics:
+      data:
+        95th-percentile-tail-latency:
+          data:
+            canary:
+              value: 1717514124294n
+            default:
+              value: 308750m
+        error-rate:
+          data:
+            canary:
+              value: "0"
+            default:
+              value: "0"
+        mean-latency:
+          data:
+            canary:
+              value: 197500m
+            default:
+              value: 228787878788n
+        request-count:
+          data:
+            canary:
+              value: 3333333334n
+            default:
+              value: "55"
+      message: 'Error: ; Warning: ; Info: '
+      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
+      timestamp: "2020-12-28T18:34:32Z"
+    versionAssessments:
+      data:
+        canary:
+        - true
+        - true
+        default:
+        - true
+        - true
+      message: 'Error: ; Warning: ; Info: '
+      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
+      timestamp: "2020-12-28T18:34:32Z"
+    weights:
+      data:
+      - name: default
+        value: 75
+      - name: canary
+        value: 25
+      message: 'Error: ; Warning: ; Info: all ok'
+      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
+      timestamp: "2020-12-28T18:34:32Z"
+    winnerAssessment:
+      data:
+        winner: canary
+        winnerFound: true
+      message: 'Error: ; Warning: ; Info: candidate satisfies all objectives'
+      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
+      timestamp: "2020-12-28T18:34:32Z"
+  completedIterations: 4
+  conditions:
+  - lastTransitionTime: "2020-12-28T18:34:34Z"
+    message: Completed Iteration 4
+    reason: IterationUpdate
+    status: "False"
+    type: Completed
+  - lastTransitionTime: "2020-12-28T18:33:34Z"
+    status: "False"
+    type: Failed
+  currentWeightDistribution:
+  - name: default
+    value: 75
+  - name: canary
+    value: 25
+  initTime: "2020-12-28T18:33:34Z"
+  lastUpdateTime: "2020-12-28T18:34:34Z"
+  message: 'IterationUpdate: Completed Iteration 4'
+  versionRecommendedForPromotion: canary
+  startTime: "2020-12-28T18:33:42Z"
   metrics:
   - metricObj:
       apiVersion: iter8.tools/v2alpha2
@@ -126,104 +221,3 @@ spec:
         type: counter
         urlTemplate: url
     name: request-count
-  strategy:
-    handlers:
-      failure: finish
-      finish: finish
-      rollback: finish
-      start: start
-    type: Canary
-    weights:
-      algorithm: Progressive
-      maxCandidateWeight: 100
-      maxCandidateWeightIncrement: 10
-  target: kfserving-test/sklearn-iris
-  versionInfo:
-    baseline:
-      name: default
-    candidates:
-    - name: canary
-      weightObjRef:
-        apiVersion: serving.kubeflow.org/v1alpha2
-        fieldPath: .spec.canaryTrafficPercent
-        kind: InferenceService
-        name: sklearn-iris
-        namespace: kfserving-test
-status:
-  analysis:
-    aggregatedMetrics:
-      data:
-        95th-percentile-tail-latency:
-          data:
-            canary:
-              value: 1717514124294n
-            default:
-              value: 308750m
-        error-rate:
-          data:
-            canary:
-              value: "0"
-            default:
-              value: "0"
-        mean-latency:
-          data:
-            canary:
-              value: 197500m
-            default:
-              value: 228787878788n
-        request-count:
-          data:
-            canary:
-              value: 3333333334n
-            default:
-              value: "55"
-      message: 'Error: ; Warning: ; Info: '
-      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
-      timestamp: "2020-12-28T18:34:32Z"
-    versionAssessments:
-      data:
-        canary:
-        - true
-        - true
-        default:
-        - true
-        - true
-      message: 'Error: ; Warning: ; Info: '
-      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
-      timestamp: "2020-12-28T18:34:32Z"
-    weights:
-      data:
-      - name: default
-        value: 75
-      - name: canary
-        value: 25
-      message: 'Error: ; Warning: ; Info: all ok'
-      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
-      timestamp: "2020-12-28T18:34:32Z"
-    winnerAssessment:
-      data:
-        winner: canary
-        winnerFound: true
-      message: 'Error: ; Warning: ; Info: candidate satisfies all objectives'
-      provenance: http://iter8-analytics.iter8-system:8080/v2/analytics_results
-      timestamp: "2020-12-28T18:34:32Z"
-  completedIterations: 4
-  conditions:
-  - lastTransitionTime: "2020-12-28T18:34:34Z"
-    message: Completed Iteration 4
-    reason: IterationUpdate
-    status: "False"
-    type: ExperimentCompleted
-  - lastTransitionTime: "2020-12-28T18:33:34Z"
-    status: "False"
-    type: ExperimentFailed
-  currentWeightDistribution:
-  - name: default
-    value: 75
-  - name: canary
-    value: 25
-  initTime: "2020-12-28T18:33:34Z"
-  lastUpdateTime: "2020-12-28T18:34:34Z"
-  message: 'IterationUpdate: Completed Iteration 4'
-  versionRecommendedForPromotion: canary
-  startTime: "2020-12-28T18:33:42Z"
