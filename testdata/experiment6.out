@@ -9,11 +9,15 @@ Testing pattern: Canary
 Number of completed iterations: 9
 
 ****** Winner Assessment ******
+> If the candidate version satisfies the experiment objectives, then it is the winner.
+> Otherwise, if the baseline version satisfies the experiment objectives, it is the winner.
+> Otherwise, there is no winner.
 App versions in this experiment: [default canary]
 Winning version: canary
 Version recommended for promotion: canary
 
 ****** Objective Assessment ******
+> Identifies whether or not the experiment objectives are satisfied by the most recently observed metrics values for each version.
 +--------------------------+---------+--------+
 |        OBJECTIVE         | DEFAULT | CANARY |
 +--------------------------+---------+--------+
@@ -23,6 +27,7 @@ Version recommended for promotion: canary
 +--------------------------+---------+--------+
 
 ****** Metrics Assessment ******
+> Most recently read values of experiment metrics for each version.
 +--------------------------------+---------+---------+
 |             METRIC             | DEFAULT | CANARY  |
 +--------------------------------+---------+---------+

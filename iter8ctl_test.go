@@ -31,6 +31,7 @@ var tests = []test{
 	{name: "experiment7", flags: []string{"describe", "-f", utils.CompletePath("testdata", "experiment7.yaml")}, outputFilename: "experiment7.out", errorFilename: ""},
 	{name: "experiment8", flags: []string{"describe", "-f", utils.CompletePath("testdata", "experiment8.yaml")}, outputFilename: "experiment8.out", errorFilename: ""},
 	{name: "experiment9", flags: []string{"describe", "-f", utils.CompletePath("testdata", "experiment9.yaml")}, outputFilename: "experiment9.out", errorFilename: ""},
+	{name: "experiment11", flags: []string{"describe", "-f", utils.CompletePath("testdata", "experiment11.yaml")}, outputFilename: "experiment11.out", errorFilename: ""},
 }
 
 /* CLI tests */

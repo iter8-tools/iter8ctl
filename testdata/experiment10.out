@@ -11,11 +11,15 @@ Experiment stage: Completed
 Number of completed iterations: 8
 
 ****** Winner Assessment ******
+> If the candidate version satisfies the experiment objectives, then it is the winner.
+> Otherwise, if the baseline version satisfies the experiment objectives, it is the winner.
+> Otherwise, there is no winner.
 App versions in this experiment: [sample-application-v1 sample-application-v2]
 Winning version: sample-application-v2
 Version recommended for promotion: sample-application-v2
 
 ****** Objective Assessment ******
+> Identifies whether or not the experiment objectives are satisfied by the most recently observed metrics values for each version.
 +--------------------------+-----------------------+-----------------------+
 |        OBJECTIVE         | SAMPLE-APPLICATION-V1 | SAMPLE-APPLICATION-V2 |
 +--------------------------+-----------------------+-----------------------+
@@ -25,6 +29,7 @@ Version recommended for promotion: sample-application-v2
 +--------------------------+-----------------------+-----------------------+
 
 ****** Metrics Assessment ******
+> Most recently read values of experiment metrics for each version.
 +-----------------------------+-----------------------+-----------------------+
 |           METRIC            | SAMPLE-APPLICATION-V1 | SAMPLE-APPLICATION-V2 |
 +-----------------------------+-----------------------+-----------------------+

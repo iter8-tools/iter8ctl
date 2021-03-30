@@ -151,6 +151,16 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 	if a := d.experiment.Status.Analysis; a != nil {
 		if w := a.WinnerAssessment; w != nil {
 			d.description.WriteString("\n****** Winner Assessment ******\n")
+			var explanation string = ""
+			switch d.experiment.Spec.Strategy.TestingPattern {
+			case v2alpha2.TestingPatternCanary:
+				explanation = "> If the candidate version satisfies the experiment objectives, then it is the winner.\n> Otherwise, if the baseline version satisfies the experiment objectives, it is the winner.\n> Otherwise, there is no winner.\n"
+			case v2alpha2.TestingPatternConformance:
+				explanation = "> If the version being validated; i.e., the baseline version, satisfies the experiment objectives, it is the winner.\n> Otherwise, there is no winner.\n"
+			default:
+				explanation = ""
+			}
+			d.description.WriteString(explanation)
 			if d.experiment.Spec.Strategy.TestingPattern != v2alpha2.TestingPatternConformance && d.experiment.Spec.VersionInfo != nil {
 				versions := []string{d.experiment.Spec.VersionInfo.Baseline.Name}
 				for i := 0; i < len(d.experiment.Spec.VersionInfo.Candidates); i++ {
@@ -164,7 +174,8 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 				d.description.WriteString("Winning version: not found\n")
 			}
 
-			if d.experiment.Status.VersionRecommendedForPromotion != nil {
+			if d.experiment.Spec.Strategy.TestingPattern != v2alpha2.TestingPatternConformance &&
+				d.experiment.Status.VersionRecommendedForPromotion != nil {
 				d.description.WriteString(fmt.Sprintf("Version recommended for promotion: %s\n", *d.experiment.Status.VersionRecommendedForPromotion))
 			}
 		}
@@ -183,6 +194,7 @@ func (d *Cmd) printObjectiveAssessment() *Cmd {
 	if a := d.experiment.Status.Analysis; a != nil {
 		if v := a.VersionAssessments; v != nil {
 			d.description.WriteString("\n****** Objective Assessment ******\n")
+			d.description.WriteString("> Identifies whether or not the experiment objectives are satisfied by the most recently observed metrics values for each version.\n")
 			table := tablewriter.NewWriter(&d.description)
 			table.SetRowLine(true)
 			versions := d.experiment.GetVersions()
@@ -219,6 +231,7 @@ func (d *Cmd) printMetrics() *Cmd {
 	if a := d.experiment.Status.Analysis; a != nil {
 		if v := a.AggregatedMetrics; v != nil {
 			d.description.WriteString("\n****** Metrics Assessment ******\n")
+			d.description.WriteString("> Most recently read values of experiment metrics for each version.\n")
 			table := tablewriter.NewWriter(&d.description)
 			table.SetRowLine(true)
 			versions := d.experiment.GetVersions()
