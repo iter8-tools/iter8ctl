@@ -125,9 +125,11 @@ func (d *Cmd) printProgress() *Cmd {
 	d.description.WriteString("Experiment namespace: " + d.experiment.Namespace + "\n")
 	d.description.WriteString("Target: " + d.experiment.Spec.Target + "\n")
 	d.description.WriteString(fmt.Sprintf("Testing pattern: %v\n", d.experiment.Spec.Strategy.TestingPattern))
+	deploymentPattern := v2alpha2.DeploymentPatternProgressive
 	if d.experiment.Spec.Strategy.DeploymentPattern != nil {
-		d.description.WriteString(fmt.Sprintf("Deployment pattern: %v\n", *d.experiment.Spec.Strategy.DeploymentPattern))
+		deploymentPattern = *d.experiment.Spec.Strategy.DeploymentPattern
 	}
+	d.description.WriteString(fmt.Sprintf("Deployment pattern: %v\n", deploymentPattern))
 
 	d.description.WriteString("\n****** Progress Summary ******\n")
 	sta := d.experiment.Status

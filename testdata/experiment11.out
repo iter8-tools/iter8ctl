@@ -4,6 +4,7 @@ Experiment name: conformance-sample
 Experiment namespace: default
 Target: default/sample-app
 Testing pattern: Conformance
+Deployment pattern: Progressive
 
 ****** Progress Summary ******
 Experiment stage: Completed
