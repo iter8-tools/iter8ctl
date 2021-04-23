@@ -109,3 +109,76 @@ func (e *Experiment) GetSatisfyStrs(objectiveIndex int) []string {
 	}
 	return sat
 }
+
+// StringifyReward returns a string representation of the given reward.
+func StringifyReward(reward v2alpha2.Reward) string {
+	r := ""
+	r += reward.Metric
+	if reward.PreferredDirection == v2alpha2.PreferredDirectionHigher {
+		r += " (higher better)"
+	} else {
+		r += " (lower better)"
+	}
+	return r
+}
+
+// GetMetricStr returns the metric value as a string for a given metric and a given version.
+func (e *Experiment) GetMetricDec(metric string, version string) *inf.Dec {
+	am := e.Status.Analysis.AggregatedMetrics
+	if am == nil {
+		return nil
+	}
+	if vals, ok := am.Data[metric]; ok {
+		if val, ok := vals.Data[version]; ok {
+			if val.Value != nil {
+				z := new(inf.Dec).Round(val.Value.AsDec(), 3, inf.RoundCeil)
+				return z
+			}
+		}
+	}
+	return nil
+}
+
+// GetAnnotatedMetricStrs returns a slice of values for a reward
+func (e *Experiment) GetAnnotatedMetricStrs(reward v2alpha2.Reward) []string {
+	versions := e.GetVersions()
+	row := make([]string, len(versions))
+	var currentBestIndex *int
+	var currentBestValue *inf.Dec
+	for i, v := range versions {
+		val := e.GetMetricDec(reward.Metric, v)
+
+		if val == nil {
+			row[i] = "unavailable"
+			continue
+		}
+
+		row[i] = val.String()
+
+		// set currentBest if not already set
+		if currentBestIndex == nil {
+			currentBestIndex, currentBestValue = &i, val
+			continue
+		}
+
+		// update currentBest
+
+		if reward.PreferredDirection == v2alpha2.PreferredDirectionHigher {
+			if -1 == currentBestValue.Cmp(val) {
+				currentBestIndex, currentBestValue = &i, val
+			}
+			continue
+		}
+
+		// reward.PreferredDirection == v2alpha2.PreferredDirectionLower
+		if 1 == currentBestValue.Cmp(val) {
+			currentBestIndex, currentBestValue = &i, val
+		}
+	}
+
+	// mark current best with '*'
+	if currentBestIndex != nil {
+		row[*currentBestIndex] = row[*currentBestIndex] + " *"
+	}
+	return row
+}

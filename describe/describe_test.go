@@ -87,7 +87,7 @@ func TestStdinBadYAML(t *testing.T) {
 }
 
 func TestPrintProgress(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printProgress()
@@ -96,7 +96,7 @@ func TestPrintProgress(t *testing.T) {
 }
 
 func TestPrintWinnerAssessment(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printWinnerAssessment()
@@ -105,7 +105,7 @@ func TestPrintWinnerAssessment(t *testing.T) {
 }
 
 func TestPrintObjectiveAssessment(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printObjectiveAssessment()
@@ -114,7 +114,7 @@ func TestPrintObjectiveAssessment(t *testing.T) {
 }
 
 func TestPrintVersionAssessment(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printVersionAssessment()
@@ -123,7 +123,7 @@ func TestPrintVersionAssessment(t *testing.T) {
 }
 
 func TestPrintMetrics(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printMetrics()
@@ -131,8 +131,17 @@ func TestPrintMetrics(t *testing.T) {
 	}
 }
 
+func TestPrintRewardAssessments(t *testing.T) {
+	for i := 1; i <= 12; i++ {
+		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
+		d := Builder(&a, &b, &c)
+		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().printRewardAssessment()
+		assert.NoError(t, d.Error())
+	}
+}
+
 func TestPrintAnalysis(t *testing.T) {
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= 12; i++ {
 		a, b, c := bytes.Buffer{}, bytes.Buffer{}, bytes.Buffer{}
 		d := Builder(&a, &b, &c)
 		d.ParseFlags([]string{"-f", utils.CompletePath("../", fmt.Sprintf("testdata/experiment%v.yaml", i))}).GetExperiment().PrintAnalysis()

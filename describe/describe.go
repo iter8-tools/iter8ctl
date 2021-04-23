@@ -185,6 +185,33 @@ func (d *Cmd) printWinnerAssessment() *Cmd {
 	return d
 }
 
+// printRewardAssessment prints a matrix of values for each reward-version pair.
+// Rows correspond to experiment rewards. Columns correspond to versions.
+// The current "best" version for each reward is denoted with a "*".
+func (d *Cmd) printRewardAssessment() *Cmd {
+	if d.err != nil ||
+		d.experiment.Status.Analysis == nil ||
+		d.experiment.Status.Analysis.VersionAssessments == nil ||
+		d.experiment.Spec.Criteria == nil ||
+		len(d.experiment.Spec.Criteria.Rewards) == 0 {
+		return d
+	}
+
+	d.description.WriteString("\n****** Reward Assessment ******\n")
+	d.description.WriteString("> Identifies values of reward metrics for each version. The best version is marked with a '*'.\n")
+	table := tablewriter.NewWriter(&d.description)
+	table.SetRowLine(true)
+	versions := d.experiment.GetVersions()
+	table.SetHeader(append([]string{"Reward"}, versions...))
+	for _, reward := range d.experiment.Spec.Criteria.Rewards {
+		row := []string{experiment.StringifyReward(reward)}
+		table.Append(append(row, d.experiment.GetAnnotatedMetricStrs(reward)...))
+	}
+	table.Render()
+
+	return d
+}
+
 // printObjectiveAssessment prints a matrix of boolean values into d's description buffer.
 // Rows correspond to experiment objectives, columns correspond to versions, and entry [i, j] indicates if objective i is satisfied by version j.
 // Objective assessments are printed in the same sequence as in the experiment's spec.criteria.objectives section.
@@ -255,7 +282,10 @@ func (d *Cmd) PrintAnalysis() *Cmd {
 	}
 	d.printProgress()
 	if d.experiment.Started() {
-		d.printWinnerAssessment().printVersionAssessment().printMetrics()
+		d.printWinnerAssessment().
+			printRewardAssessment().
+			printVersionAssessment().
+			printMetrics()
 	}
 	if d.err == nil {
 		fmt.Fprintln(d.stdout, d.description.String())

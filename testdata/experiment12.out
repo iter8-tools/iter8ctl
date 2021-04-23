@@ -1,0 +1,53 @@
+
+****** X Overview ******
+Experiment name: istio-quickstart
+Experiment namespace: default
+Target: bookinfo-iter8/productpage
+Testing pattern: A/B
+Deployment pattern: Progressive
+
+****** Progress Summary ******
+Experiment stage: Completed
+Number of completed iterations: 10
+
+****** Winner Assessment ******
+App versions in this experiment: [A B]
+Winning version: B
+Version recommended for promotion: B
+
+****** Reward Assessment ******
+> Identifies values of reward metrics for each version. The best version is marked with a '*'.
++--------------------------------+-------+----------+
+|             REWARD             |   A   |    B     |
++--------------------------------+-------+----------+
+| books-purchased (higher        | 5.030 | 24.454 * |
+| better)                        |       |          |
++--------------------------------+-------+----------+
+
+****** Objective Assessment ******
+> Identifies whether or not the experiment objectives are satisfied by the most recently observed metrics values for each version.
++--------------------------------+------+------+
+|           OBJECTIVE            |  A   |  B   |
++--------------------------------+------+------+
+| iter8-istio/mean-latency <=    | true | true |
+|                        100.000 |      |      |
++--------------------------------+------+------+
+| iter8-istio/error-rate <=      | true | true |
+|                          0.010 |      |      |
++--------------------------------+------+------+
+
+****** Metrics Assessment ******
+> Most recently read values of experiment metrics for each version.
++--------------------------------+----------+---------+
+|             METRIC             |    A     |    B    |
++--------------------------------+----------+---------+
+| books-purchased                |    5.030 |  24.454 |
++--------------------------------+----------+---------+
+| iter8-istio/mean-latency       |   90.847 |  43.257 |
+| (milliseconds)                 |          |         |
++--------------------------------+----------+---------+
+| request-count                  | 1506.619 | 414.576 |
++--------------------------------+----------+---------+
+| iter8-istio/error-rate         |    0.000 |   0.000 |
++--------------------------------+----------+---------+
+
